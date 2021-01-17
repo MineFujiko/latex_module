@@ -1,0 +1,80 @@
+\documentclass{article}
+\usepackage[UTF8,fontset=windowsnew,heading=true]{ctex} % 使用包的方式添加时推荐使用的参数
+\usepackage{listings}
+\usepackage{xcolor}
+\definecolor{vgreen}{RGB}{104,180,104}
+\definecolor{vblue}{RGB}{49,49,255}
+\definecolor{vorange}{RGB}{255,143,102}
+
+\lstdefinestyle{verilog-style}
+{
+    language=Verilog,
+    breaklines=true,  %代码过长则换行
+    % basicstyle=\small\ttfamily,
+    % keywordstyle=\color{vblue},
+    % identifierstyle=\color{black},
+    % commentstyle=\color{vgreen},
+    numbers=left,
+    % numberstyle=\tiny\color{black},
+    numberstyle= \small,%行号字体
+    % numbersep=10pt,
+    tabsize=4,
+    moredelim=*[s][\colorIndex]{[}{]},
+    literate=*{:}{:}1,
+    rulesepcolor= \color{gray}, %代码块边框颜色
+    frame=shadowbox%用方框框住代码块
+}
+    
+\makeatletter
+\newcommand*\@lbracket{[}
+\newcommand*\@rbracket{]}
+\newcommand*\@colon{:}
+\newcommand*\colorIndex{%
+    \edef\@temp{\the\lst@token}%
+    \ifx\@temp\@lbracket \color{black}%
+    \else\ifx\@temp\@rbracket \color{black}%
+    \else\ifx\@temp\@colon \color{black}%
+    \else \color{vorange}%
+    \fi\fi\fi
+}
+\makeatother
+    
+\usepackage{trace}
+\begin{document}
+This is my first document.
+
+Happy texing!
+豫章故郡，洪都新府。星分翼轸，地接衡庐。襟三江而带五湖，控蛮荆而引瓯越。
+
+\begin{lstlisting}[style={verilog-style}]
+module Mixing {
+    ///////// ADC /////////
+    inout              ADC_CS_N,
+    output             ADC_DIN,
+    input              ADC_DOUT,
+    output             ADC_SCLK,
+    ///////// ADC /////////
+    input              AUD_ADCDAT,
+    inout              AUD_ADCLRCK,
+    inout              AUD_BCLK,
+    output             AUD_DACDAT,
+    inout              AUD_DACLRCK,
+    output             AUD_XCK,
+    ///////// clocks /////////
+    input              clock2_50,
+    input              clock3_50,
+    input              clock4_50,
+    input              clock_50,
+    ///////// HEX /////////
+    output      [6:0]  HEX0,
+    output      [6:0]  HEX1,
+    output      [6:0]  HEX2,
+    output      [6:0]  HEX3,
+    output      [6:0]  HEX4,
+    output      [6:0]  HEX5,
+    ///////// FOO /////////
+    output      [2]    FOO,
+}
+\end{lstlisting}
+
+\end{document}
